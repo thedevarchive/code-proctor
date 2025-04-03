@@ -8,7 +8,8 @@ This project was made so that I can get started on learning MERN with MongoDB in
 
 Made with (TBA)
 
-Special thanks to Heaps of Coffee, ChatGPT, and most importantly, **Learning and MERNing**
+Special thanks to Heaps of Coffee
+**Stay Learning and MERNing**
 
 ## Getting Started
 
