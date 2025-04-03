@@ -2,7 +2,7 @@
 
 *"The journey of a thousand lines of code begins with a single 'Hello World'."*
 
-A simple, structured learning tracker designed for coding enthusiasts. Inspired by the organisation of Trello and the educational flow of Codecademy, CodeProctor helps you break down courses into manageable modules, track progress, and stay on top of your learning journey—without the unnecessary complexity.
+A simple, structured learning tracker designed for coding enthusiasts. Inspired by the organisation of Trello and the educational flow of Codecademy, CodeProctor helps you break down courses into manageable modules, track progress and stay on top of your learning journey—without the unnecessary complexity.
 
 This project was made so that I can get started on learning MERN with MongoDB instead of MySQL (finally). Furthermore, this is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
