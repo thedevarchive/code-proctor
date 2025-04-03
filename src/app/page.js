@@ -3,22 +3,20 @@
 import { useState } from "react";
 import Link from "next/link";
 import LoginHeader from "@/components/headers/LoginHeader";
-import CourseCard from "@/components/CourseCard"; 
+import CourseCard from "@/components/CourseCard";
+import AddField from "@/components/AddField";
 
 export default function LearningTracker() {
   const [courses, setCourses] = useState([
     { id: 1, name: "React Course", progress: 50 },
     { id: 2, name: "MongoDB Guide", progress: 30 },
   ]);
-  const [newCourse, setNewCourse] = useState("");
 
-  const addCourse = () => {
-    if (newItem.trim()) {
-      setCourses([
-        ...courses,
-        { id: Date.now(), name: newItem, progress: 0 },
-      ]);
-      setNewCourse("");
+  //add a course to the list 
+  //newCourse is implicitly declared as its value was passed from the component
+  const addCourse = (newCourse) => {
+    if (newCourse.trim()) {
+      setCourses([...courses, { id: courses.length + 1, name: newCourse, progress: 0, modules: [] }]);
     }
   };
 
@@ -30,30 +28,16 @@ export default function LearningTracker() {
 
       <div className="space-y-4">
         {courses.map((course) => (
-          <Link href={`/courses/${course.id}`}>
+          <Link key={course.id} href={`/courses/${course.id}`}>
             <CourseCard
-              key={course.id}
               courseName={course.name}
               progress={course.progress}
               courseId={course.id}
             />
           </Link>
         ))}
-        <div className="flex gap-2 mt-4">
-          <input
-            type="text"
-            value={newCourse}
-            onChange={(e) => setNewItem(e.target.value)}
-            placeholder="Add new learning goal..."
-            className="bg-gray-700 text-gray-300 p-2 rounded-md border-none w-full"
-          />
-          <button
-            onClick={addCourse}
-            className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-md"
-          >
-            Add
-          </button>
-        </div>
+        {/* Add Course Field */}
+        <AddField placeholder="Add a new course..." onAdd={addCourse} />
       </div>
     </div>
   );
