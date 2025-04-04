@@ -24,8 +24,12 @@ export default function AuthPage() {
     })
       .then((res) => res.json())
       .then((res) => {
-        if (res.success) {
-          //setIsLogin(true); //change to login when sign up is successful
+        setUsername(""); 
+        setEmail(""); 
+        setPassword("");
+
+        if (res.user) {
+          setIsLogin(!isLogin); //change to login when sign up is successful
         }
       })
       .catch((error) => {
@@ -49,18 +53,21 @@ export default function AuthPage() {
             <input
               placeholder="Username"
               className="bg-gray-700 border border-gray-600 text-gray-300 p-2 rounded w-full"
+              value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
           )}
           <input
             placeholder="Email"
             className="bg-gray-700 border border-gray-600 text-gray-300 p-2 rounded w-full"
+              value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             placeholder="Password"
             type="password"
             className="bg-gray-700 border border-gray-600 text-gray-300 p-2 rounded w-full"
+              value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button className="bg-blue-500 hover:bg-blue-600 text-white w-full p-2 rounded"
