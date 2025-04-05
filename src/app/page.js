@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import LoginHeader from "@/components/headers/LoginHeader";
 import CourseCard from "@/components/CourseCard";
@@ -40,9 +42,6 @@ export default function LearningTracker() {
   //add a course to the list 
   //newCourse is implicitly declared as its value was passed from the component
   const addCourse = (newCourse) => {
-    // if (newCourse.trim()) {
-    //   setCourses([...courses, { id: courses.length + 1, name: newCourse, progress: 0, modules: [] }]);
-    // }
     const token = localStorage.getItem("token");
 
     fetch(`${API_URL}/courses/`, {

@@ -7,6 +7,7 @@ import CourseCard from "@/components/CourseCard";
 import AddField from "@/components/AddField";
 
 const CourseDetails = () => {
+  const router = useRouter(); // Initialize useRouter
   const params = useParams();
   const courseId = params.id;
 
@@ -19,8 +20,6 @@ const CourseDetails = () => {
   const course = courses.find((c) => c.id === courseId);
 
   if (!course) return <p>Course not found</p>;
-
-  const router = useRouter(); // Initialize useRouter
 
   const [completedModules, setCompletedModules] = useState(
     new Array(course.modules.length).fill(false)
