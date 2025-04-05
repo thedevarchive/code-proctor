@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -10,6 +11,8 @@ export default function AuthPage() {
   const [password, setPassword] = useState("");
 
   const API_URL = "http://localhost:1111";
+
+  const router = useRouter(); // Initialize useRouter
 
   function handleSignup() {
     const url = `${API_URL}/users/signup`;
@@ -24,8 +27,8 @@ export default function AuthPage() {
     })
       .then((res) => res.json())
       .then((res) => {
-        setUsername(""); 
-        setEmail(""); 
+        setUsername("");
+        setEmail("");
         setPassword("");
 
         if (res.user) {
@@ -39,7 +42,31 @@ export default function AuthPage() {
   }
 
   function handleLogin() {
-    //TODO: implement this 
+    const url = `${API_URL}/users/login`;
+
+    return fetch(url, {
+      method: "POST",
+      headers: { "accept": "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email, password: password })
+    })
+      .then((res) => res.json())
+      .then(async (res) => {
+        if (res.error) {
+          console.log(res.error);
+        }
+        else {
+          //otherwise, store token and redirect them to home
+          localStorage.setItem("token", res.token);
+          localStorage.setItem("isLoggedIn", JSON.stringify(true));
+          setEmail("");
+          setPassword("");
+          router.push("/");
+        }
+      })
+      .catch(error => {
+        console.log('There has been a problem with your fetch operation: \n\t' + error);
+        showNetworkFailToast();
+      });
   }
 
   return (
@@ -60,14 +87,14 @@ export default function AuthPage() {
           <input
             placeholder="Email"
             className="bg-gray-700 border border-gray-600 text-gray-300 p-2 rounded w-full"
-              value={email}
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <input
             placeholder="Password"
             type="password"
             className="bg-gray-700 border border-gray-600 text-gray-300 p-2 rounded w-full"
-              value={password}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button className="bg-blue-500 hover:bg-blue-600 text-white w-full p-2 rounded"

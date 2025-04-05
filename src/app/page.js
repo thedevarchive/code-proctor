@@ -1,12 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import LoginHeader from "@/components/headers/LoginHeader";
 import CourseCard from "@/components/CourseCard";
 import AddField from "@/components/AddField";
 
 export default function LearningTracker() {
+  const router = useRouter(); // Initialize useRouter
+
+  useEffect(() => {
+    // Check if the user is logged in by checking the token in localStorage
+    const token = localStorage.getItem("token");
+
+    // If no token is found, redirect to the auth page
+    if (!token) {
+      router.push("/auth"); // Redirect to your login/signup page
+    }
+
+    fetch("http://localhost:1111/users/userinfo/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorisation: `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+  }, [router]);
+
   const [courses, setCourses] = useState([
     { id: 1, name: "React Course", progress: 50 },
     { id: 2, name: "MongoDB Guide", progress: 30 },

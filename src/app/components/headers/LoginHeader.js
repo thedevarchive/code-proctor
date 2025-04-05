@@ -4,7 +4,6 @@
 import { useRouter } from "next/navigation";
 
 const LoginHeader = () => {
-
     const router = useRouter(); // Initialize useRouter
 
     const signOut = () => {
