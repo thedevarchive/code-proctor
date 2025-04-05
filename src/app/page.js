@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import LoginHeader from "@/components/headers/LoginHeader";
 import CourseCard from "@/components/CourseCard";
