@@ -68,7 +68,7 @@ export default function LearningTracker() {
         courses.length > 0 ? (
           <div className="space-y-4">
             {courses.map((course) => (
-              <Link key={course._id} href={`/courses/${course.id}`}>
+              <Link key={course._id} href={`/courses/${course._id}`}>
                 <CourseCard
                   courseName={course.title}
                   progress={course.progress}
