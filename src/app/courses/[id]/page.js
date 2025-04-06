@@ -13,13 +13,17 @@ const CourseDetails = () => {
   const courseId = params.id;
   const [course, setCourse] = useState(null);
   const [modules, setModules] = useState([]);
+  const [editingCourse, setEditingCourse] = useState(false);
+  const [editedTitle, setEditedTitle] = useState("");
+  const [editedDescription, setEditedDescription] = useState("");
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editedModule, setEditedModule] = useState("");
 
   const API_URL = "http://localhost:1111";
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    // If no token is found, redirect to the auth page
     if (!token) {
       router.push("/auth"); // Redirect to your login/signup page
       return; // Exit early if no token, don't fetch course
@@ -34,9 +38,9 @@ const CourseDetails = () => {
         authorisation: `Bearer ${token}`,
       },
     })
-      .then(res => res.json())
-      .then(data => setCourse(data.course))
-      .catch(err => console.error(err));
+      .then((res) => res.json())
+      .then((data) => setCourse(data.course))
+      .catch((err) => console.error(err));
   }, [courseId, router]);
 
   // Set modules when course is fetched
@@ -46,11 +50,67 @@ const CourseDetails = () => {
     }
   }, [course]);
 
-  if (!course) return <p>Course not found</p>;
-
   const addModule = (newModule) => {
-    const updatedModules = [...modules, newModule];
-    setModules(updatedModules);
+    const token = localStorage.getItem("token");
+
+    fetch(`${API_URL}/courses/${courseId}/modules`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: newModule,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setModules(data.modules))
+      .catch((err) => console.error(err));
+  };
+
+  const handleEditCourse = () => {
+    setEditingCourse(true);
+    setEditedTitle(course.title);
+    setEditedDescription(course.description);
+  };
+
+  const handleSaveCourse = () => {
+    const token = localStorage.getItem("token");
+
+    fetch(`${API_URL}/courses/${courseId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        title: editedTitle,
+        description: editedDescription,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCourse(data.course);
+        setEditingCourse(false);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleDeleteCourse = () => {
+    const token = localStorage.getItem("token");
+
+    fetch(`${API_URL}/courses/${courseId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then(() => {
+        router.push("/dashboard"); // Redirect to dashboard after delete
+      })
+      .catch((err) => console.error(err));
   };
 
   const handleEdit = (index, currentName) => {
@@ -58,18 +118,61 @@ const CourseDetails = () => {
     setEditedModule(currentName);
   };
 
-  const handleSaveEdit = (index) => {
+  const toggleCompletion = (index) => {
     const updatedModules = [...modules];
-    updatedModules[index] = editedModule;
+    updatedModules[index].isFinished = !updatedModules[index].isFinished;
     setModules(updatedModules);
-    setEditingIndex(null);
-    setEditedModule("");
+
+    const token = localStorage.getItem("token");
+
+    // Update the completion status on the server
+    fetch(`${API_URL}/courses/${courseId}/modules/${modules[index]._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        isFinished: updatedModules[index].isFinished,
+      }),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        // Optionally, handle any success responses here
+      })
+      .catch((err) => console.error("Error updating completion status", err));
+  };
+
+  const handleSaveEdit = (index) => {
+    const token = localStorage.getItem("token");
+    const updatedModule = { ...modules[index], title: editedModule };
+
+    // Update on server
+    fetch(`${API_URL}/courses/${courseId}/modules/${modules[index]._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ title: editedModule }),
+    })
+      .then(res => res.json())
+      .then((data) => {
+        const updatedModules = [...modules];
+        updatedModules[index] = data.updatedModule || updatedModule; // Prefer backend response if available
+        setModules(updatedModules);
+        setEditingIndex(null);
+        setEditedModule("");
+      })
+      .catch(err => console.error("Error updating module title", err));
   };
 
   const handleDelete = (index) => {
     const updatedModules = modules.filter((_, i) => i !== index);
     setModules(updatedModules);
   };
+
+  if (!course) return <p>Course not found</p>;
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-200 p-6">
@@ -82,33 +185,83 @@ const CourseDetails = () => {
         ← Back to Dashboard
       </button>
 
-      <CourseCard
-        key={course.id}
-        courseName={course.title}
-        progress={course.progress}
-        courseId={course.id}
-      />
-
       <div className="p-6">
-        <h2 className="text-2xl font-bold text-green-400 mb-4">About this Course</h2>
-        <p className="text-gray-300 mb-6">{course.description}</p>
+        {editingCourse ? (
+          <>
+            <input
+              type="text"
+              value={editedTitle}
+              onChange={(e) => setEditedTitle(e.target.value)}
+              className="bg-gray-700 text-gray-100 p-2 rounded mb-4 w-full"
+            />
+            <textarea
+              value={editedDescription}
+              onChange={(e) => setEditedDescription(e.target.value)}
+              className="bg-gray-700 text-gray-100 p-2 rounded mb-4 w-full"
+            />
+            <button
+              onClick={handleSaveCourse}
+              className="bg-blue-500 text-white p-2 rounded mr-4"
+            >
+              Save Changes
+            </button>
+            <button
+              onClick={handleSaveCourse}
+              className="bg-red-500 text-white p-2 rounded"
+            >
+              Cancel
+            </button>
+          </>
+        ) : (
+          <>
+            <CourseCard
+              key={courseId}
+              courseName={course.title}
+              progress={course.progress}
+              courseId={courseId}
+            />
+            <h2 className="text-2xl font-bold text-green-400 mb-4">About this Course</h2>
+            {
+              course.description !== "" ? (
+                <p className="text-gray-300 mb-6">{course.description}</p>
+              ) : (
+                <p className="text-gray-300 mb-6"><em>(No description added.)</em></p>
+              )
+            }
+            <button
+              onClick={handleEditCourse}
+              className="bg-yellow-400 text-black p-2 rounded mr-4"
+            >
+              Edit Course
+            </button>
+            <button
+              onClick={handleDeleteCourse}
+              className="bg-red-500 text-white p-2 rounded"
+            >
+              Delete Course
+            </button>
+          </>
+        )}
 
-        <h2 className="text-xl font-bold text-green-400 mb-4">Modules:</h2>
+        <h2 className="text-xl font-bold text-green-400 mt-4 mb-4">Modules:</h2>
         <ul className="space-y-2">
           {modules.map((module, index) => (
-            <li key={index} className="flex items-center justify-between bg-gray-800 p-3 rounded-lg shadow-md">
+            <li
+              key={module._id}
+              className="flex items-center justify-between bg-gray-800 p-3 rounded-lg shadow-md"
+            >
               <div className="flex items-center">
                 <input
                   type="checkbox"
                   className="mr-3 w-5 h-5 accent-green-400 cursor-pointer"
-                  checked={module.completed}
+                  checked={module.isFinished}
                   onChange={() => toggleCompletion(index)}
                 />
-                <span>{module}</span>
+                <span>{module.title}</span>
               </div>
               <div className="flex space-x-2">
                 <button
-                  onClick={() => handleEdit(index, module)}
+                  onClick={() => handleEdit(index, module.title)}
                   className="text-yellow-400 hover:text-yellow-300"
                 >
                   ✏️
@@ -128,6 +281,6 @@ const CourseDetails = () => {
       </div>
     </div>
   );
-};
+}
 
 export default CourseDetails;

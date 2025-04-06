@@ -25,14 +25,22 @@ export default function LearningTracker() {
       router.push("/auth"); // Redirect to your login/signup page
     }
 
-    fetch(`${API_URL}/users/userinfo/`, {
+    fetch(`${API_URL}/users/userinfo`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         authorisation: `Bearer ${token}`,
       },
     })
-      .then(res => res.json())
+      .then(res => {
+        if(res.status === 403) {
+          localStorage.setItem("token", "");
+          localStorage.setItem("isLoggedIn", JSON.stringify(false));
+          router.push("/auth"); 
+          return; 
+        }
+        return res.json(); 
+      })
       .then(data => setCourses(data.courses))
       .catch(err => console.error(err));
   }, [router]);
