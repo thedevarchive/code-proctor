@@ -172,11 +172,11 @@ const CourseDetails = () => {
     const updatedModule = { ...modules[index], title: editedModule };
 
     // Update on server
-    fetch(`${API_URL}/courses/${courseId}/modules/${modules[index]._id}`, {
+    fetch(`${API_URL}/courses/${courseId}/modules/${modules[index]._id}/title`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        authorisation: `Bearer ${token}`,
       },
       body: JSON.stringify({ title: editedModule }),
     })
@@ -184,8 +184,7 @@ const CourseDetails = () => {
       .then((data) => {
         const updatedModules = [...modules];
         updatedModules[index] = data.updatedModule || updatedModule; // Prefer backend response if available
-        
-        setCourse(data.course); 
+
         setModules(updatedModules);
         setEditingIndex(null);
         setEditedModule("");
@@ -194,8 +193,28 @@ const CourseDetails = () => {
   };
 
   const handleDeleteModule = (index) => {
-    const updatedModules = modules.filter((_, i) => i !== index);
-    setModules(updatedModules);
+    const token = localStorage.getItem("token");
+    const updatedModule = modules.filter((_, i) => i !== index);
+
+    // Update on server
+    fetch(`${API_URL}/courses/${courseId}/modules/${modules[index]._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        authorisation: `Bearer ${token}`,
+      }
+    })
+      .then(res => res.json())
+      .then((data) => {
+        const updatedModules = [...modules];
+        updatedModules[index] = data.updatedModule || updatedModule; // Prefer backend response if available
+
+        setProgress(data.progress); 
+        setModules(data.modules);
+        setEditingIndex(null);
+        setEditedModule("");
+      })
+      .catch(err => console.error("Error updating module title", err));
   };
 
   if (!course) return <p>Course not found</p>;
