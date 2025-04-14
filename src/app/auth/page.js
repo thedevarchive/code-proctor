@@ -60,12 +60,11 @@ export default function AuthPage() {
           localStorage.setItem("isLoggedIn", JSON.stringify(true));
           setEmail("");
           setPassword("");
-          router.push("/");
+          router.push("/dashboard");
         }
       })
       .catch(error => {
         console.log('There has been a problem with your fetch operation: \n\t' + error);
-        showNetworkFailToast();
       });
   }
 

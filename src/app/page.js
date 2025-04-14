@@ -1,103 +1,49 @@
-"use client";
+"use client"; 
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import LoginHeader from "@/components/headers/LoginHeader";
-import CourseCard from "@/components/CourseCard";
-import AddField from "@/components/AddField";
+import React from 'react';
 
-import { SiBookstack } from "react-icons/si";
-
-export default function LearningTracker() {
-  const router = useRouter(); // Initialize useRouter
-
-  const [courses, setCourses] = useState([]);
-
-  const API_URL = "http://localhost:1111"; 
-
-  useEffect(() => {
-    // Check if the user is logged in by checking the token in localStorage
-    const token = localStorage.getItem("token");
-
-    // If no token is found, redirect to the auth page
-    if (!token) {
-      router.push("/auth"); // Redirect to your login/signup page
-    }
-
-    fetch(`${API_URL}/users/userinfo`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorisation: `Bearer ${token}`,
-      },
-    })
-      .then(res => {
-        if(res.status === 403) {
-          localStorage.setItem("token", "");
-          localStorage.setItem("isLoggedIn", JSON.stringify(false));
-          router.push("/auth"); 
-          return; 
-        }
-        return res.json(); 
-      })
-      .then(data => setCourses(data.courses))
-      .catch(err => console.error(err));
-  }, [router]);
-
-  //add a course to the list 
-  //newCourse is implicitly declared as its value was passed from the component
-  const addCourse = (newCourse) => {
-    const token = localStorage.getItem("token");
-
-    fetch(`${API_URL}/courses/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        authorisation: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        title: newCourse
-      })
-    })
-      .then(res => res.json())
-      .then(data => setCourses(data.courses))
-      .catch(err => console.error(err));
-
-  };
-
+export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-200 p-6">
-      <LoginHeader />
+    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-900 text-green-400">
+      {/* Quote at the top */}
+      <div className="text-center mb-8">
+        <p className="italic text-sm">"The journey of a thousand lines of code begins with a single 'Hello World'."</p>
+      </div>
 
-      <div className="text-2xl font-bold text-gray-400 mb-6">Dashboard</div>
+      {/* Header */}
+      <h1 className="text-5xl font-bold text-center mb-4">Welcome to CodeProctor</h1>
 
-      {
-        courses.length > 0 ? (
-          <div className="space-y-4">
-            {courses.map((course) => (
-              <Link key={course._id} href={`/courses/${course._id}`}>
-                <CourseCard
-                  courseName={course.title}
-                  progress={course.progress}
-                  courseId={course._id}
-                />
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="mt-8 mx-auto w-max">
-              <SiBookstack className="text-green-400 text-center ml-16 mb-4" size={150} />
-              <p>No courses yet. Start learning code now!</p>
-            </div>
-          </div>
-        )
-      }
+      {/* Subheader */}
+      <h2 className="text-xl font-light text-center mb-8">A Developer’s Playground where Code meets Precision</h2>
 
-      {/* Add Course Field */}
-      <AddField placeholder="Add a new course..." onAdd={addCourse} />
+      {/* Body Section 1 */}
+      <section className="mb-16 text-center">
+        <h3 className="text-2xl font-semibold mb-4">For the Serious Coder</h3>
+        <p className="text-lg">We help you manage your workflow with tools that boost your productivity. Whether you’re debugging, building, or designing, we've got your back.</p>
+      </section>
+
+      {/* Body Section 2 */}
+      <section className="mb-16 text-center">
+        <h3 className="text-2xl font-semibold mb-4">Features</h3>
+        <ul className="list-none space-y-4 text-lg">
+          <li>Track your progress as you learn various coding languages and concepts.</li>
+          <li>Visualize your progress and accomplishments with detailed dashboards and stats.</li>
+          <li>Stay motivated by setting and achieving learning milestones.</li>
+        </ul>
+      </section>
+
+      {/* Final Text and Button */}
+      <div className="mb-16 text-center">
+        <p className="text-lg">What are you waiting for? Start learning how to code today.</p>
+        <button className="mt-6 px-6 py-3 bg-green-500 text-white text-xl rounded-full hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
+          Sign Me Up
+        </button>
+      </div>
+
+      {/* Footer */}
+      <footer className="absolute bottom-4 text-center text-sm w-full">
+        <p>Made with Heaps of Coffee, ChatGPT, and most importantly, Learning and MERNing</p>
+      </footer>
     </div>
   );
 }
-
