@@ -10,6 +10,8 @@ export default function Home() {
         <p className="italic text-sm">"The journey of a thousand lines of code begins with a single 'Hello World'."</p>
       </div>
 
+      <hr className="border border-white mb-8 w-full" />
+
       {/* Header */}
       <h1 className="text-5xl font-bold text-center mb-4">Welcome to CodeProctor</h1>
 
