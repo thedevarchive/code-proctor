@@ -7,7 +7,8 @@ const LoginHeader = () => {
     const router = useRouter(); // Initialize useRouter
 
     const signOut = () => {
-        // Add your sign-out logic here (like clearing user session or token)
+        localStorage.setItem("token", "");
+        localStorage.setItem("isLoggedIn", JSON.stringify(false));
         console.log("Signed out!");
 
         // Navigate to the auth page

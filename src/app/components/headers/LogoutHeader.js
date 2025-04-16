@@ -7,11 +7,10 @@ const LogoutHeader = () => {
     const router = useRouter(); // Initialize useRouter
 
     const signIn = () => {
-        // Add your sign-out logic here (like clearing user session or token)
         console.log("Navigating to auth…");
 
         // Navigate to the auth page
-        router.push("/auth"); // Redirect to /auth page
+        router.push("/auth"); 
     };
 
     return (
