@@ -1,10 +1,12 @@
 "use client";
 
 import React from 'react';
+import LogoutHeader from './components/headers/LogoutHeader';
 
 export default function Home() {
     return (
-        <div className="flex flex-col justify-center items-center bg-gray-900 text-green-400">
+        <div className="flex flex-col justify-center bg-gray-900 text-green-400">
+            <LogoutHeader /> 
             {/* Quote at the top */}
             <div className='flex items-center justify-center bg-[url(http://3.bp.blogspot.com/-0c89sOKM9vM/VAQ-VzXjT5I/AAAAAAAAPQE/6Ksz7Osrh98/s1600/26.%2BSchlegeis%2BLake%2C%2BTyrol%2C%2BAustria%2B-%2B29%2BWonderful%2BPaths.jpg)] bg-no-repeat bg-cover bg-center  w-full h-50'>
                 <div className="text-center mb-8 bg-gray-900/80 p-2 mt-6">
