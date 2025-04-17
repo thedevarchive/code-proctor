@@ -20,7 +20,7 @@ const LoginHeader = () => {
             <div className="text-3xl font-bold text-green-400">CodeProctor</div>
             <button
                 onClick={signOut}
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md"
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md cursor-pointer"
             >
                 Sign Out
             </button>
