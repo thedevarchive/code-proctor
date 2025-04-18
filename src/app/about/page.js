@@ -23,9 +23,9 @@ export default function About() {
                     <h2 className="text-2xl font-semibold mb-2">🛠️ What CodeProctor Offers</h2>
                     <ul className="list-disc list-inside mb-6 space-y-2">
                         <li>Track your coding progress across multiple languages and concepts</li>
-                        <li>Visual dashboards to see how far you’ve come</li>
+                        <li>A visual dashboard to see how far you’ve come</li>
                         <li>Custom milestones to keep you motivated and goal-driven</li>
-                        <li>A sleek, distraction-free interface made by and for developers</li>
+                        <li>A sleek, distraction-free interface made by and for professional and prospective developers</li>
                     </ul>
 
                     <h2 className="text-2xl font-semibold mb-2">☕ Built With Passion</h2>
