@@ -2,6 +2,7 @@
 
 import React from 'react';
 import LogoutHeader from './components/headers/LogoutHeader';
+import { Footer } from './components/Footer';
 
 export default function Home() {
     return (
@@ -43,10 +44,7 @@ export default function Home() {
             </div>
 
             {/* Footer */}
-            <footer className="text-center text-sm w-full p-4">
-                <p className='text-xl'>☕️ · 🤖 · 📚</p>
-                <p>Made with Heaps of Coffee, ChatGPT, and most importantly, Learning and MERNing</p>
-            </footer>
+            <Footer /> 
         </div>
     );
 }
