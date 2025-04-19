@@ -11,6 +11,11 @@ export default function Testimonials() {
             title: "Full-Stack Dev Student",
             quote: "CodeProctor is what happens when Codecademy and Trello fall in love and create the ultimate learning tracker. It keeps my coding journey structured without overwhelming me. Finally, a tool that helps me stay on track without making me feel like I’m managing a corporate project! 10/10 would recommend.",
         },
+        {
+            name: "Devin Alnight",
+            title: "Junior Backend Developer",
+            quote: "As a developer, I often find myself coding late into the night, and CodeProctor has been my perfect companion. With its easy-to-use interface and structured learning, I can track my progress and stay motivated, even when the hours slip away. Thanks to CodeProctor, I’m coding all night, every night!",
+        },
     ];
 
     return (
