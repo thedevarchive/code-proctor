@@ -58,7 +58,7 @@ export default function Testimonials() {
                                     {icons[index % icons.length]}
                                 </div>
                                 <div className='ml-4'>
-                                    <p className="font-semibold">{t.name}</p>
+                                    <p className="font-semibold text-white">{t.name}</p>
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{t.title}</p>
                                 </div>
                             </div>
