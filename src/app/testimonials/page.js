@@ -3,6 +3,7 @@
 import React from 'react';
 import LogoutHeader from '../components/headers/LogoutHeader';
 import { Footer } from '@/components/Footer';
+import { Code, Terminal, Blocks, MessageCircleQuestion, Laptop2, Bug } from "lucide-react";
 
 export default function Testimonials() {
     const testimonials = [
@@ -33,6 +34,13 @@ export default function Testimonials() {
         },
     ];
 
+    const icons = [<Code className='w-8 h-8' />, 
+                <Terminal className='w-8 h-8' />, 
+                <Blocks className='w-8 h-8' />, 
+                <MessageCircleQuestion className='w-8 h-8' />, 
+                <Laptop2 className='w-8 h-8' />, 
+                <Bug className='w-8 h-8' />];
+
     return (
         <div className="flex flex-col justify-center bg-gray-900 text-green-400">
             <LogoutHeader />
@@ -45,9 +53,14 @@ export default function Testimonials() {
                             className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md border border-gray-200 dark:border-gray-700"
                         >
                             <p className="italic text-lg mb-4">“{t.quote}”</p>
-                            <div className="mt-4">
-                                <p className="font-semibold">{t.name}</p>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">{t.title}</p>
+                            <div className='flex mt-4'>
+                                <div className="text-4xl text-blue-500 mt-2">
+                                    {icons[index % icons.length]}
+                                </div>
+                                <div className='ml-4'>
+                                    <p className="font-semibold">{t.name}</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400">{t.title}</p>
+                                </div>
                             </div>
                         </div>
                     ))}
