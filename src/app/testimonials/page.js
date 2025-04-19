@@ -16,6 +16,21 @@ export default function Testimonials() {
             title: "Junior Backend Developer",
             quote: "As a developer, I often find myself coding late into the night, and CodeProctor has been my perfect companion. With its easy-to-use interface and structured learning, I can track my progress and stay motivated, even when the hours slip away. Thanks to CodeProctor, I’m coding all night, every night!",
         },
+        {
+            name: "B. Lachlan Chain",
+            title: "Self-Taught Blockchain Dev",
+            quote: "Fair dinkum, CodeProctor’s a real game-changer, mate! It's like a bonza pair of coding boots—gets you through all the heavy lifting without breaking a sweat. I’ve been hammering away at my learning modules like a roo in a trampoline park, and now I’m ticking off progress faster than you can say ‘debug'. Whether it's modules or code blocks, this app keeps me on track, day and night. It’s all straight-up learning, one line of code at a time!",
+        },
+        {
+            name: "Past You",
+            title: "Developer in the Making",
+            quote: "I don't know if I can do the coding thing, but I'll give this a go.",
+        },
+        {
+            name: "Lex Deverson",
+            title: "Junior Frontend Tinkerer",
+            quote: "I rate this 5 out of 5 coffees. That's how much it fuels my coding!",
+        },
     ];
 
     return (
