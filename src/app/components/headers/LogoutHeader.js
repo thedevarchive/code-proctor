@@ -1,6 +1,6 @@
 "use client";
 
-//import Link from "next/link"; //might use later for other pages 
+import Link from "next/link"; //might use later for other pages 
 import { useRouter } from "next/navigation";
 
 const LogoutHeader = () => {
@@ -14,15 +14,15 @@ const LogoutHeader = () => {
     };
 
     return (
-        <div className="flex justify-between mx-2 my-4 gap-8">
-            <div className="text-3xl font-bold text-green-400">CodeProctor</div>
-            <div className="flex gap-8 mt-2 font-bold">
-                <div>About</div>
-                <div>Testimonials</div>
+        <div className="flex justify-between mx-4 my-4 gap-8">
+            <div className="text-3xl font-bold text-green-400"><Link href="/">CodeProctor</Link></div>
+            <div className="flex gap-16 mt-2 font-bold text-xl mr-12">
+                <Link href="/about">About</Link>
+                <Link href="/testimonials">Testimonials</Link>
             </div>
             <button
                 onClick={signIn}
-                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md cursor-pointer"
+                className="bg-green-500 hover:bg-green-600 text-white text-lg font-bold px-4 py-2 rounded-md cursor-pointer"
             >
                 Sign In
             </button>
