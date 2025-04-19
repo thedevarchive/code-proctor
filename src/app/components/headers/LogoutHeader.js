@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link"; //might use later for other pages 
+import Link from "next/link"; 
 import { useRouter, usePathname } from "next/navigation";
 
 const LogoutHeader = () => {
     const router = useRouter(); // Initialize useRouter
-    const pathname = usePathname();
+    const pathname = usePathname(); //get current path to highlight page user is currently on (only on about and testimonials page)
 
     const signIn = () => {
         console.log("Navigating to auth…");
@@ -14,6 +14,7 @@ const LogoutHeader = () => {
         router.push("/auth");
     };
 
+    //show header with sign in button
     return (
         <div className="flex justify-between mx-4 my-4 gap-8">
             <div className="text-3xl font-bold text-green-400"><Link href="/">CodeProctor</Link></div>
