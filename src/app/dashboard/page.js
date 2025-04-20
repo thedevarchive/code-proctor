@@ -13,6 +13,7 @@ export default function LearningTracker() {
   const router = useRouter(); // Initialize useRouter
 
   const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true); 
 
   const API_URL = "http://localhost:1111"; 
 
@@ -42,7 +43,10 @@ export default function LearningTracker() {
         }
         return res.json(); 
       })
-      .then(data => setCourses(data.courses))
+      .then(data => {
+        setCourses(data.courses); 
+        setLoading(false); 
+      })
       .catch(err => console.error(err));
   }, [router]);
 
@@ -66,6 +70,14 @@ export default function LearningTracker() {
       .catch(err => console.error(err));
 
   };
+
+  if (loading) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-400"></div>
+    </div>
+  );
+}
 
   //show user list of courses they are taking 
   return (
