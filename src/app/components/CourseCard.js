@@ -1,5 +1,4 @@
-
-
+//Shows the courses that the user is taking and the progress they've made in it
 export default function CourseCard({ courseName, progress, courseId }) {
   return (
     <div key={courseId} className="bg-gray-800 p-4 rounded-lg shadow-md mb-4">

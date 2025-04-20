@@ -11,6 +11,7 @@ export default function AddField({ placeholder, onAdd }) {
     setInputValue(""); // Clear input field
   };
 
+  //Display input field for courses and modules
   return (
     <div className="flex gap-2 mt-4">
       <input

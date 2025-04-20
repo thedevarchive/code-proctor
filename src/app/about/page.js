@@ -4,11 +4,11 @@ import React from 'react';
 import LogoutHeader from '../components/headers/LogoutHeader';
 import { Footer } from '@/components/Footer';
 
+//page explaining to users what CodeProctor does
 export default function About() {
     return (
         <div className="flex flex-col justify-center bg-gray-900 text-green-400">
             <LogoutHeader />
-            {/* Quote at the top */}
             <div className="p-8">
                 <div className="max-w-3xl mx-auto">
                     <h1 className="text-4xl font-bold mb-4 text-center">About CodeProctor</h1>

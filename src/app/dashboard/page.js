@@ -25,6 +25,7 @@ export default function LearningTracker() {
       router.push("/auth"); // Redirect to your login/signup page
     }
 
+    //otherwise, get courses user is taking
     fetch(`${API_URL}/users/userinfo`, {
       method: "GET",
       headers: {
@@ -66,6 +67,7 @@ export default function LearningTracker() {
 
   };
 
+  //show user list of courses they are taking 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-200 p-6">
       <LoginHeader />
@@ -95,7 +97,7 @@ export default function LearningTracker() {
         )
       }
 
-      {/* Add Course Field */}
+      {/* user can add new course here */}
       <AddField placeholder="Add a new course..." onAdd={addCourse} />
     </div>
   );

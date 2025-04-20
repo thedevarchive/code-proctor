@@ -1,5 +1,6 @@
 "use client"; 
 
+//Footer for the web app
 export const Footer = () => {
     return (
         <footer className="text-center text-sm w-full p-4">

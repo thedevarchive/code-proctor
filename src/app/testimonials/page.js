@@ -5,7 +5,10 @@ import LogoutHeader from '../components/headers/LogoutHeader';
 import { Footer } from '@/components/Footer';
 import { Code, Terminal, Blocks, MessageCircleQuestion, Laptop2, Bug } from "lucide-react";
 
+//show testimonials of the app
+//all testimonials are fictional unless stated otherwise 
 export default function Testimonials() {
+    //store testimonials in an array
     const testimonials = [
         {
             name: "Jamie Coder",
@@ -34,6 +37,7 @@ export default function Testimonials() {
         },
     ];
 
+    //icons to be displayed next to the names 
     const icons = [<Code className='w-8 h-8' />, 
                 <Terminal className='w-8 h-8' />, 
                 <Blocks className='w-8 h-8' />, 

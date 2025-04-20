@@ -16,6 +16,7 @@ export default function AuthPage() {
 
   const router = useRouter(); // Initialize useRouter
 
+  //API call for handling user signup
   function handleSignup() {
     const url = `${API_URL}/users/signup`;
 
@@ -43,6 +44,7 @@ export default function AuthPage() {
       });
   }
 
+  //API call for handling user login
   function handleLogin() {
     const url = `${API_URL}/users/login`;
 
@@ -79,6 +81,9 @@ export default function AuthPage() {
             {isLogin ? "Login to CodeProctor" : "Sign Up for CodeProctor"}
           </h1>
           <div className="space-y-4">
+            {/* Show login fields when user navigates to page
+                When clicking Sign up link, switch to signup fields
+                Button handles both login and signup API calls */}
             {!isLogin && (
               <input
                 placeholder="Username"
