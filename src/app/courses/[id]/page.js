@@ -37,6 +37,7 @@ const CourseDetails = () => {
 
     if (!courseId) return; // Ensure courseId is available before fetching
 
+    //get selected course
     fetch(`${API_URL}/courses/${courseId}`, {
       method: "GET",
       headers: {
@@ -65,6 +66,7 @@ const CourseDetails = () => {
     }
   }, [course]);
 
+  //handle adding of new module
   const handleAddModule = (newModule) => {
     const token = localStorage.getItem("token");
 
@@ -86,18 +88,21 @@ const CourseDetails = () => {
       .catch((err) => console.error(err));
   };
 
+  //handle editing course
   const handleEditCourse = () => {
     setEditingCourse(true);
     setEditedTitle(course.title);
     setEditedDescription(course.description);
   };
 
+  //handle cancelling of course edit mode
   const handleCancelCourse = () => {
     setEditingCourse(false);
     setEditedTitle("");
     setEditedDescription("");
   }
 
+  //handles saving of updated courses
   const handleSaveCourse = () => {
     const token = localStorage.getItem("token");
 
@@ -120,6 +125,7 @@ const CourseDetails = () => {
       .catch((err) => console.error(err));
   };
 
+  //handle deletion of courses
   const handleDeleteCourse = () => {
     const token = localStorage.getItem("token");
 
@@ -137,16 +143,19 @@ const CourseDetails = () => {
       .catch((err) => console.error(err));
   };
 
+  //handle editing of module title 
   const handleEditModule = (index, currentName) => {
     setEditingIndex(index);
     setEditedModule(currentName);
   };
 
+  //handle cancellation of module edit mode
   const handleCancelModule = () => {
     setEditingIndex(null);
     setEditedModule("");
   };
 
+  //handle whenever user ticks off a module
   const toggleCompletion = (index) => {
     const updatedModules = [...modules];
     updatedModules[index].isFinished = !updatedModules[index].isFinished;
@@ -167,6 +176,7 @@ const CourseDetails = () => {
       .catch((err) => console.error("Error updating completion status", err));
   };
 
+  // handle saving of module
   const handleSaveModule = (index) => {
     const token = localStorage.getItem("token");
     const updatedModule = { ...modules[index], title: editedModule };
@@ -192,6 +202,7 @@ const CourseDetails = () => {
       .catch(err => console.error("Error updating module title", err));
   };
 
+  //handle module deletion 
   const handleDeleteModule = (index) => {
     const token = localStorage.getItem("token");
     const updatedModule = modules.filter((_, i) => i !== index);
@@ -219,6 +230,7 @@ const CourseDetails = () => {
 
   if (!course) return <p>Course not found</p>;
 
+  //display course details and modules under the course
   return (
     <div className="min-h-screen bg-gray-900 text-gray-200 p-6">
       <LoginHeader />
