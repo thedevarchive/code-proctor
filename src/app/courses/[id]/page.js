@@ -15,6 +15,8 @@ const CourseDetails = () => {
   const params = useParams();
 
   const courseId = params.id;
+
+  const [loading, setLoading] = useState(true); 
   const [course, setCourse] = useState(null);
   const [progress, setProgress] = useState(0); 
   const [modules, setModules] = useState([]);
@@ -52,6 +54,7 @@ const CourseDetails = () => {
           router.push("/auth"); 
           return; 
         }
+        setLoading(false); 
         return res.json(); 
       })
       .then((data) => setCourse(data.course))
@@ -228,6 +231,13 @@ const CourseDetails = () => {
       .catch(err => console.error("Error updating module title", err));
   };
 
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-400"></div>
+      </div>
+    );
+  }
   if (!course) return <p>Course not found</p>;
 
   //display course details and modules under the course
