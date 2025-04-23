@@ -9,6 +9,7 @@ This project was made so that I can get started on learning MERN with MongoDB in
 # Tech Used
 
 ![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 
 Special thanks to Heaps of Coffee
 
