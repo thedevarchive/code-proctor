@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false); 
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -48,6 +49,7 @@ export default function AuthPage() {
   function handleLogin() {
     const url = `${API_URL}/users/login`;
 
+    setLoading(true); 
     return fetch(url, {
       method: "POST",
       headers: { "accept": "application/json", "Content-Type": "application/json" },
@@ -69,7 +71,16 @@ export default function AuthPage() {
       })
       .catch(error => {
         console.log('There has been a problem with your fetch operation: \n\t' + error);
+        setLoading(false); 
       });
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-400"></div>
+      </div>
+    );
   }
 
   return (

@@ -13,9 +13,9 @@ export default function LearningTracker() {
   const router = useRouter(); // Initialize useRouter
 
   const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
-  const API_URL = "http://localhost:1111"; 
+  const API_URL = "http://localhost:1111";
 
   useEffect(() => {
     // Check if the user is logged in by checking the token in localStorage
@@ -35,17 +35,17 @@ export default function LearningTracker() {
       },
     })
       .then(res => {
-        if(res.status === 403) {
+        if (res.status === 403) {
           localStorage.setItem("token", "");
           localStorage.setItem("isLoggedIn", JSON.stringify(false));
-          router.push("/auth"); 
-          return; 
+          router.push("/auth");
+          return;
         }
-        return res.json(); 
+        return res.json();
       })
       .then(data => {
-        setCourses(data.courses); 
-        setLoading(false); 
+        setCourses(data.courses);
+        setLoading(false);
       })
       .catch(err => console.error(err));
   }, [router]);
@@ -72,12 +72,12 @@ export default function LearningTracker() {
   };
 
   if (loading) {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-400"></div>
-    </div>
-  );
-}
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-green-400"></div>
+      </div>
+    );
+  }
 
   //show user list of courses they are taking 
   return (
