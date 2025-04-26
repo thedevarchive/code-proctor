@@ -13,6 +13,8 @@ export default function LearningTracker() {
   const router = useRouter(); // Initialize useRouter
 
   const [courses, setCourses] = useState([]);
+  const [newCourseType, setNewCourseType] = useState("");
+
   const [loading, setLoading] = useState(true);
 
   const API_URL = "http://localhost:1111";
@@ -108,9 +110,25 @@ export default function LearningTracker() {
           </div>
         )
       }
+      <div className="flex flex-col md:flex-row items-center gap-4 mb-6 w-auto">
+        <div className="flex mt-8 mb-4">
+          <select
+            id="courseType"
+            value={newCourseType}
+            onChange={(e) => setNewCourseType(e.target.value)}
+            className="bg-gray-700 text-gray-200 p-2 rounded w-full"
+          >
+            <option value="">-- Choose type --</option>
+            <option value="Frontend">Frontend</option>
+            <option value="Backend">Backend</option>
+            <option value="Database">Database</option>
+            <option value="Algorithms">Algorithms</option>
+          </select>
+        </div>
 
-      {/* user can add new course here */}
-      <AddField placeholder="Add a new course..." onAdd={addCourse} />
+        {/* user can add new course here */}
+        <AddField placeholder="Add a new course..." onAdd={addCourse} />
+      </div>
     </div>
   );
 }

@@ -13,7 +13,7 @@ export default function AddField({ placeholder, onAdd }) {
 
   //Display input field for courses and modules
   return (
-    <div className="flex gap-2 mt-4">
+    <div className="flex gap-2 mt-4 w-full flex-1">
       <input
         type="text"
         value={inputValue}
