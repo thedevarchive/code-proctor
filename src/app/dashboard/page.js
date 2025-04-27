@@ -119,10 +119,14 @@ export default function LearningTracker() {
             className="bg-gray-700 text-gray-200 p-2 rounded w-full"
           >
             <option value="">-- Choose type --</option>
-            <option value="Frontend">Frontend</option>
-            <option value="Backend">Backend</option>
-            <option value="Database">Database</option>
-            <option value="Algorithms">Algorithms</option>
+            <option value="Lecture">Lecture</option>
+            <option value="Book">Backend</option>
+            <option value="Tutorial">Tutorial</option>
+            <option value="Practical">Practical</option>
+            <option value="Certification">Certification</option>
+            <option value="Maths">Maths</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Other">Other</option>
           </select>
         </div>
 
