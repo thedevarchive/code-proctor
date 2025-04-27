@@ -53,3 +53,6 @@ You can start editing the page by modifying `app/page.js` (and all other `page.j
 * A visual dashboard showing all the courses you have accomplished
 * Customisable milestones for each course
 * A sleek, distraction-free interface designed for developers of all levels
+
+# How to Report Issues
+Email me at amaengo@protonmail.com if you find any bugs in the program or have any issues running it.
