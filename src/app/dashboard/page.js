@@ -13,6 +13,7 @@ export default function LearningTracker() {
   const router = useRouter(); // Initialize useRouter
 
   const [courses, setCourses] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
   const [newCourseType, setNewCourseType] = useState("");
 
   const [loading, setLoading] = useState(true);
@@ -54,7 +55,7 @@ export default function LearningTracker() {
 
   //add a course to the list 
   //newCourse is implicitly declared as its value was passed from the component
-  const addCourse = (newCourse) => {
+  const addCourse = (title, courseType) => {
     const token = localStorage.getItem("token");
 
     fetch(`${API_URL}/courses/`, {
@@ -64,7 +65,8 @@ export default function LearningTracker() {
         authorisation: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        title: newCourse
+        title: title,
+        courseType: courseType
       })
     })
       .then(res => res.json())
@@ -110,15 +112,23 @@ export default function LearningTracker() {
           </div>
         )
       }
-      <div className="flex flex-col md:flex-row items-center gap-4 mb-6 w-auto">
-        <div className="flex mt-8 mb-4">
+      <div className="flex flex-col md:flex-row items-center gap-4 mt-6 mb-6 w-full flex-1">
+        {/* user can add new course here */}
+        <input
+          type="text"
+          value={newTitle}
+          onChange={(e) => setNewTitle(e.target.value)}
+          placeholder="Add a new course..."
+          className="bg-gray-700 text-gray-300 p-2 rounded-md border-none w-full"
+        />
+        <div className="">
           <select
             id="courseType"
             value={newCourseType}
             onChange={(e) => setNewCourseType(e.target.value)}
-            className="bg-gray-700 text-gray-200 p-2 rounded w-full"
+            className="bg-gray-700 text-gray-200 p-2 rounded w-30"
           >
-            <option value="">-- Choose type --</option>
+            <option value="">Select type</option>
             <option value="Lecture">Lecture</option>
             <option value="Book">Backend</option>
             <option value="Tutorial">Tutorial</option>
@@ -129,9 +139,12 @@ export default function LearningTracker() {
             <option value="Other">Other</option>
           </select>
         </div>
-
-        {/* user can add new course here */}
-        <AddField placeholder="Add a new course..." onAdd={addCourse} />
+        <button
+          onClick={() => addCourse(newTitle, newCourseType)}
+          className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-md"
+        >
+          Add
+        </button>
       </div>
     </div>
   );
