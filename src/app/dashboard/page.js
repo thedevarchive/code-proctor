@@ -121,24 +121,22 @@ export default function LearningTracker() {
           placeholder="Add a new course..."
           className="bg-gray-700 text-gray-300 p-2 rounded-md border-none w-full"
         />
-        <div className="">
-          <select
-            id="courseType"
-            value={newCourseType}
-            onChange={(e) => setNewCourseType(e.target.value)}
-            className="bg-gray-700 text-gray-200 p-2 rounded w-30"
-          >
-            <option value="">Select type</option>
-            <option value="Lecture">Lecture</option>
-            <option value="Book">Backend</option>
-            <option value="Tutorial">Tutorial</option>
-            <option value="Practical">Practical</option>
-            <option value="Certification">Certification</option>
-            <option value="Maths">Maths</option>
-            <option value="Hybrid">Hybrid</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+        <select
+          id="courseType"
+          value={newCourseType}
+          onChange={(e) => setNewCourseType(e.target.value)}
+          className="bg-gray-700 text-gray-200 p-2 rounded w-30"
+        >
+          <option value="">Select type</option>
+          <option value="Lecture">Lecture</option>
+          <option value="Book">Backend</option>
+          <option value="Tutorial">Tutorial</option>
+          <option value="Practical">Practical</option>
+          <option value="Certification">Certification</option>
+          <option value="Maths">Maths</option>
+          <option value="Hybrid">Hybrid</option>
+          <option value="Other">Other</option>
+        </select>
         <button
           onClick={() => addCourse(newTitle, newCourseType)}
           className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-md"
