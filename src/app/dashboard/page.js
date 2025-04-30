@@ -96,6 +96,7 @@ export default function LearningTracker() {
               <Link key={course._id} href={`/courses/${course._id}`}>
                 <CourseCard
                   courseName={course.title}
+                  courseType={course.courseType}
                   progress={course.progress}
                   courseId={course._id}
                 />

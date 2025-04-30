@@ -284,10 +284,11 @@ const CourseDetails = () => {
             <CourseCard
               key={courseId}
               courseName={course.title}
+              courseType={course.courseType}
               progress={progress}
               courseId={courseId}
             />
-            <h2 className="text-2xl font-bold text-green-400 mb-4">About this Course</h2>
+            <h2 className="text-2xl font-bold text-green-400 mb-2">About this Course</h2>
             {
               course.description !== "" ? (
                 <p className="text-gray-300 mb-6">{course.description}</p>
