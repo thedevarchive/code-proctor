@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const LoginHeader = () => {
-    const router = useRouter(); // Initialize useRouter
+    const router = useRouter(); // Initialise useRouter
 
     const signOut = () => {
         localStorage.setItem("token", "");

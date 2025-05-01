@@ -9,7 +9,7 @@ import CourseCard from "@/components/CourseCard";
 import { SiBookstack } from "react-icons/si";
 
 export default function LearningTracker() {
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); // Initialise useRouter
 
   const [courses, setCourses] = useState([]);
   const [newTitle, setNewTitle] = useState("");

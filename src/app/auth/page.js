@@ -15,7 +15,7 @@ export default function AuthPage() {
 
   const API_URL = "http://localhost:1111";
 
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter(); // Initialise useRouter
 
   //API call for handling user signup
   function handleSignup() {

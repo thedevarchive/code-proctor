@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 
 const LogoutHeader = () => {
-    const router = useRouter(); // Initialize useRouter
+    const router = useRouter(); // Initialise useRouter
     const pathname = usePathname(); //get current path to highlight page user is currently on (only on about and testimonials page)
 
     const signIn = () => {
